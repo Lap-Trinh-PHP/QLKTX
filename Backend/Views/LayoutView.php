@@ -89,22 +89,22 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">LAOYOUT ADMIN</li>
                 <li>
-                    <a href="#">
+                    <a href="index.php?page=QLSinhVien">
                         <i class="fa fa-th"></i> <span>Quản lý sinh viên</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="index.php?page=QLPhong">
                         <i class="fa fa-th"></i> <span>Quản lý phòng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="index.php?page=QLHopDong">
                         <i class="fa fa-th"></i> <span>Quản lý hợp đồng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="index.php?page=ThongKeBaoCao">
                         <i class="fa fa-th"></i> <span>Thống kê, báo cáo</span>
                     </a>
                 </li>
@@ -130,6 +130,12 @@
         <!-- Main content -->
         <section class="content">
             
+            <?php 
+            
+                if(isset($fileController)){
+                    include $fileController;
+                }
+            ?>
         </section>
         <!-- /.content -->
     </div>
