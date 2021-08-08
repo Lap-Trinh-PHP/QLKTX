@@ -1,5 +1,8 @@
 
 <div class="col-md-12">
+    <div style="margin-bottom:5px;">
+        <a href="index.php?page=ThemSuaSinhVien" class="btn btn-primary">Thêm sinh viên</a>
+    </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Danh sách sinh viên</div>
         <div class="panel-body">
@@ -30,7 +33,7 @@
                             <td style='max-width: 150px;'>".$row["nganhHoc"]."</td>
                             <td style='max-width: 150px;'>".$row["lopHoc"]."</td>
                             <td  style='text-align:center;max-width:150px;'>
-                                <a class='btn btn-info' href='#'>Edit</a>&nbsp;
+                                <a class='btn btn-info' href='index.php?page=ThemSuaSinhVien'>Edit</a>&nbsp;
                                 <a class='btn btn-danger' href='#' onclick='return window.confirm('Are you sure?');'>Delete</a>
                             </td>
                         </tr>";
@@ -38,16 +41,6 @@
                     mysqli_close($conn);
                 ?>
             </table>
-            <style type="text/css">
-                .pagination{padding:0px; margin:0px;}
-            </style>
-            <ul class="pagination">
-                <li class="page-item">
-                    <!-- <?php for($i = 1; $i <= $numPage; $i++): ?>
-                    <a href="index.php?controller=products&action=read&p=<?php echo $i; ?>" class="page-link"><?php echo $i; ?></a>
-                    <?php endfor; ?> -->
-                </li>
-            </ul>
         </div>
     </div>
 </div>

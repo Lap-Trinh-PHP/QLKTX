@@ -5,6 +5,7 @@
 	include "../Application/Connection.php";
 	//---
 	$page = isset($_GET["page"]) ? $_GET["page"] : "";
-	$fileController = $page.".php";
+	if($page!="")
+		$fileController = $page.".php";
     include "Views/LayoutView.php";
  ?>
