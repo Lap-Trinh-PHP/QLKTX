@@ -1,0 +1,25 @@
+th,tr,td{
+    overflow: hidden;
+}
+ul, li{
+    list-style: none;
+}
+.sidebar-menu li span,.sidebar-menu li>div>i{
+    color: #b8c7ce;
+    cursor: pointer;
+}
+.sidebar-menu li>div>i{
+    margin: 12px 5px 12px 15px;
+}
+.sidebar-menu li:hover div>i{
+    color: #fff;
+}
+.sidebar-menu li:hover div{
+    background-color: #1e282c;
+}
+.menu-child li{
+    padding: 10px 5px 10px 10px;
+}
+.menu-child li:hover span{
+    color: #fff;
+}
