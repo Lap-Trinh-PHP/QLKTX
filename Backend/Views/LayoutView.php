@@ -89,22 +89,22 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">LAOYOUT ADMIN</li>
                 <li>
-                    <a href="index.php?controller=sinhvien&action=read">
+                    <a href="#">
                         <i class="fa fa-th"></i> <span>Quản lý sinh viên</span>
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?controller=phong&action=read">
+                    <a href="#">
                         <i class="fa fa-th"></i> <span>Quản lý phòng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?controller=hopdong&action=read">
+                    <a href="#">
                         <i class="fa fa-th"></i> <span>Quản lý hợp đồng</span>
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?controller=thongkebaocao&action=read">
+                    <a href="#">
                         <i class="fa fa-th"></i> <span>Thống kê, báo cáo</span>
                     </a>
                 </li>
@@ -129,15 +129,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <!-- <?php 
-                if(file_exists($fileController)){
-                    include $fileController;
-                    if(class_exists($classController)){
-                        $obj= new $classController();
-                        $obj->$action();
-                    }
-                }
-             ?> -->
+            
         </section>
         <!-- /.content -->
     </div>
