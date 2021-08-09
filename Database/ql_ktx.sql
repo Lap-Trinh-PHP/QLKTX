@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 08, 2021 lúc 12:05 PM
--- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.4.4
+-- Thời gian đã tạo: Th8 09, 2021 lúc 10:15 AM
+-- Phiên bản máy phục vụ: 10.4.18-MariaDB
+-- Phiên bản PHP: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `ql_ktx`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `diennuoc`
+--
+
+CREATE TABLE `diennuoc` (
+  `idHoaDon` int(11) NOT NULL,
+  `idPhong` int(11) NOT NULL,
+  `soDienIn` int(11) DEFAULT NULL,
+  `soDienOut` int(11) DEFAULT NULL,
+  `soNuocIn` int(11) DEFAULT NULL,
+  `soNuocOut` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `diennuoc`
+--
+
+INSERT INTO `diennuoc` (`idHoaDon`, `idPhong`, `soDienIn`, `soDienOut`, `soNuocIn`, `soNuocOut`) VALUES
+(1, 100, 22, 42, 57, 67);
 
 -- --------------------------------------------------------
 
@@ -118,9 +140,30 @@ CREATE TABLE `sinhvien` (
 --
 
 INSERT INTO `sinhvien` (`idSinhVien`, `hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `nganhHoc`, `lopHoc`) VALUES
-(1, 'Trần Sơn Đỉnh', '2000-03-27', 0, '03620000915', '03284880236', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
-(2, 'Nguyễn Quốc Đạt', '2000-08-08', 1, '0362000091', '03284163027', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
-(3, 'Nguyễn Duy Đồng', '2000-09-21', 1, '036486513', '0321636531', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 2');
+(2018602020, 'Trần Sơn Đỉnh', '2000-03-27', 0, '03620000915', '0328488026', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
+(2018602121, 'Nguyễn Quốc Đạt', '2000-08-08', 1, '0362000091', '0328488027', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `taisan`
+--
+
+CREATE TABLE `taisan` (
+  `idTaiSan` int(11) NOT NULL,
+  `idSinhVien` int(11) DEFAULT NULL,
+  `idPhong` int(11) NOT NULL,
+  `soLuong` int(11) DEFAULT NULL,
+  `ngayMuon` datetime DEFAULT NULL,
+  `ngayTra` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `taisan`
+--
+
+INSERT INTO `taisan` (`idTaiSan`, `idSinhVien`, `idPhong`, `soLuong`, `ngayMuon`, `ngayTra`) VALUES
+(1, 2018602020, 100, 2, '2021-09-08 00:00:00', '2021-10-08 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -158,9 +201,35 @@ CREATE TABLE `tructuquan` (
 INSERT INTO `tructuquan` (`idTruc`, `idPhong`, `tangTruc`, `ngayBatDau`, `ngayKetThuc`) VALUES
 (1, 100, 1, '2021-08-02 16:57:03', '2021-08-03 16:57:03');
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `userName` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`id`, `userName`, `password`) VALUES
+(1, 'admin', 'admin');
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `diennuoc`
+--
+ALTER TABLE `diennuoc`
+  ADD PRIMARY KEY (`idHoaDon`),
+  ADD KEY `fk_DienNuoc_phong` (`idPhong`);
 
 --
 -- Chỉ mục cho bảng `hoadon`
@@ -197,6 +266,14 @@ ALTER TABLE `sinhvien`
   ADD PRIMARY KEY (`idSinhVien`);
 
 --
+-- Chỉ mục cho bảng `taisan`
+--
+ALTER TABLE `taisan`
+  ADD PRIMARY KEY (`idTaiSan`),
+  ADD KEY `fk_TaiSan_SV` (`idSinhVien`),
+  ADD KEY `fk_TaiSan_phong` (`idPhong`);
+
+--
 -- Chỉ mục cho bảng `thutien`
 --
 ALTER TABLE `thutien`
@@ -212,8 +289,20 @@ ALTER TABLE `tructuquan`
   ADD KEY `idPhong` (`idPhong`);
 
 --
+-- Chỉ mục cho bảng `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `diennuoc`
+--
+ALTER TABLE `diennuoc`
+  ADD CONSTRAINT `fk_DienNuoc_phong` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
 
 --
 -- Các ràng buộc cho bảng `hoadon`
@@ -235,6 +324,13 @@ ALTER TABLE `kyluat`
   ADD CONSTRAINT `kyluat_ibfk_1` FOREIGN KEY (`idSinhVien`) REFERENCES `sinhvien` (`idSinhVien`);
 
 --
+-- Các ràng buộc cho bảng `taisan`
+--
+ALTER TABLE `taisan`
+  ADD CONSTRAINT `fk_TaiSan_SV` FOREIGN KEY (`idSinhVien`) REFERENCES `sinhvien` (`idSinhVien`),
+  ADD CONSTRAINT `fk_TaiSan_phong` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
+
+--
 -- Các ràng buộc cho bảng `thutien`
 --
 ALTER TABLE `thutien`
@@ -251,48 +347,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
---Tạo bảng userAd
-CREATE TABLE `user`
-(
-`id` int not null,
-primary key(`id`),
-`userName` varchar(50) not null,
-`password` varchar(50) not null
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---- Thêm dữ liệu bảng user
-INSERT INTO `user` VALUES(1,'admin','admin');
-
---Tạo bảng Tài sản
-CREATE TABLE `taisan`
-(
-`idTaiSan` int not null,
-primary key(`idTaiSan`),
-`idSinhVien` int(11) DEFAULT NULL,
-CONSTRAINT fk_TaiSan_SV FOREIGN KEY(`idSinhVien`) REFERENCES `sinhvien`(`idSinhVien`),
-`idPhong` int(11) NOT NULL,
-CONSTRAINT fk_TaiSan_phong FOREIGN KEY(`idPhong`) REFERENCES `phong`(`idPhong`),
-`soLuong` int default NULL,
-`ngayMuon` datetime DEFAULT NULL,
-`ngayTra` datetime DEFAULT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---Thêm dữ liệu bảng taisan
-INSERT INTO `taisan` VALUES(1,2018602020,100,2,'2021/09/08','2021/10/08');
-
---- Tạo bảng diennuoc
-CREATE TABLE `diennuoc`
-(
-`idHoaDon` int not null,
-primary key(`idHoaDon`),
-`idPhong` int(11) NOT NULL,
-CONSTRAINT fk_DienNuoc_phong FOREIGN KEY(`idPhong`) REFERENCES `phong`(`idPhong`),
-`soDienIn` int default NULL,
-`soDienOut` int default NULL,
-`soNuocIn` int default NULL,
-`soNuocOut` int default NULL
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
----Thêm dữ liệu bảng điện nước
-INSERT INTO `diennuoc` VALUES(1,100,22,42,57,67);
