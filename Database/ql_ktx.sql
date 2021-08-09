@@ -118,9 +118,9 @@ CREATE TABLE `sinhvien` (
 --
 
 INSERT INTO `sinhvien` (`idSinhVien`, `hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `nganhHoc`, `lopHoc`) VALUES
-(2018602020, 'Trần Sơn Đỉnh', '2000-03-27', 0, '03620000915', '03284880236', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
-(2018602121, 'Nguyễn Quốc Đạt', '2000-08-08', 1, '0362000091', '03284163027', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1')
-(2018603682, 'Nguyễn Duy Đồng', '2000-09-21', 1, '036486513', '0321636531', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 2');
+(1, 'Trần Sơn Đỉnh', '2000-03-27', 0, '03620000915', '03284880236', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
+(2, 'Nguyễn Quốc Đạt', '2000-08-08', 1, '0362000091', '03284163027', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1')
+(3, 'Nguyễn Duy Đồng', '2000-09-21', 1, '036486513', '0321636531', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 2');
 
 -- --------------------------------------------------------
 
