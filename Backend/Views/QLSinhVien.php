@@ -1,7 +1,7 @@
 
 <div class="col-md-12">
     <div style="margin-bottom:5px;">
-        <a href="index.php?page=ThemSuaSinhVien" class="btn btn-primary">Thêm sinh viên</a>
+        <a href="index.php?page=ThemSuaSinhVien&action=add" class="btn btn-primary">Thêm sinh viên</a>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Danh sách sinh viên</div>
