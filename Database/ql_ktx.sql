@@ -118,8 +118,9 @@ CREATE TABLE `sinhvien` (
 --
 
 INSERT INTO `sinhvien` (`idSinhVien`, `hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `nganhHoc`, `lopHoc`) VALUES
-(2018602020, 'Trần Sơn Đỉnh', '2000-03-27', 0, '03620000915', '0328488026', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
-(2018602121, 'Nguyễn Quốc Đạt', '2000-08-08', 1, '0362000091', '0328488027', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1');
+(2018602020, 'Trần Sơn Đỉnh', '2000-03-27', 0, '03620000915', '03284880236', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
+(2018602121, 'Nguyễn Quốc Đạt', '2000-08-08', 1, '0362000091', '03284163027', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1')
+(2018603682, 'Nguyễn Duy Đồng', '2000-09-21', 1, '036486513', '0321636531', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 2');
 
 -- --------------------------------------------------------
 
@@ -250,3 +251,48 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--Tạo bảng userAd
+CREATE TABLE `user`
+(
+`id` int not null,
+primary key(`id`),
+`userName` varchar(50) not null,
+`password` varchar(50) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--- Thêm dữ liệu bảng user
+INSERT INTO `user` VALUES(1,'admin','admin');
+
+--Tạo bảng Tài sản
+CREATE TABLE `taisan`
+(
+`idTaiSan` int not null,
+primary key(`idTaiSan`),
+`idSinhVien` int(11) DEFAULT NULL,
+CONSTRAINT fk_TaiSan_SV FOREIGN KEY(`idSinhVien`) REFERENCES `sinhvien`(`idSinhVien`),
+`idPhong` int(11) NOT NULL,
+CONSTRAINT fk_TaiSan_phong FOREIGN KEY(`idPhong`) REFERENCES `phong`(`idPhong`),
+`soLuong` int default NULL,
+`ngayMuon` datetime DEFAULT NULL,
+`ngayTra` datetime DEFAULT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--Thêm dữ liệu bảng taisan
+INSERT INTO `taisan` VALUES(1,2018602020,100,2,'2021/09/08','2021/10/08');
+
+--- Tạo bảng diennuoc
+CREATE TABLE `diennuoc`
+(
+`idHoaDon` int not null,
+primary key(`idHoaDon`),
+`idPhong` int(11) NOT NULL,
+CONSTRAINT fk_DienNuoc_phong FOREIGN KEY(`idPhong`) REFERENCES `phong`(`idPhong`),
+`soDienIn` int default NULL,
+`soDienOut` int default NULL,
+`soNuocIn` int default NULL,
+`soNuocOut` int default NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+---Thêm dữ liệu bảng điện nước
+INSERT INTO `diennuoc` VALUES(1,100,22,42,57,67);
