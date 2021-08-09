@@ -33,8 +33,8 @@
                             <td style='max-width: 150px;'>".$row["nganhHoc"]."</td>
                             <td style='max-width: 150px;'>".$row["lopHoc"]."</td>
                             <td  style='text-align:center;max-width:150px;'>
-                                <a class='btn btn-info' href='index.php?page=ThemSuaSinhVien'>Edit</a>&nbsp;
-                                <a class='btn btn-danger' href='#' onclick='return window.confirm('Are you sure?');'>Delete</a>
+                            <a class='btn btn-info' href='index.php?page=ThemSuaSinhVien&action=edit&id=".$row["idSinhVien"]."'>Edit</a>&nbsp;
+                            <a class='btn btn-danger' href='#' onclick='return window.confirm('Are you sure?');'>Delete</a>
                             </td>
                         </tr>";
                     };

@@ -1,5 +1,6 @@
 <?php
     $action = isset($_GET["action"]) ? $_GET["action"] : null;
+    $MaSV = isset($_GET["id"]) ? $_GET["id"] : null;
     $HoTen = isset($_POST["HoTen"]) ? $_POST["HoTen"] : null;
     $NgaySinh = isset($_POST["NgaySinh"]) ? $_POST["NgaySinh"] : null;
     $GioiTinh = isset($_POST["GioiTinh"]) ? $_POST["GioiTinh"] : null;
@@ -19,6 +20,36 @@
         }
         
     }
+    if($action == "edit"){
+        try{
+            $sql1 = "SELECT * FROM sinhvien WHERE idSinhVien = $MaSV";
+            $result = mysqli_query($conn, $sql1);
+            $row = mysqli_fetch_assoc($result);
+            $HoTen = $row["hoTen"];
+            $NgaySinh = $row["ngaySinh"];
+            $GioiTinh = $row["gioiTinh"];
+            $CMND = $row["soCMND"];
+            $SĐT = $row["SDT"];
+            $NganhHoc = $row["nganhHoc"];
+            $LopHoc = $row["lopHoc"];
+        }
+        catch(Exception $e){
+            echo "Lỗi".$e;
+        }
+        
+    }
+    function update(){
+        try{
+            $sql = "UPDATE sinhvien 
+            SET `hoTen`=$HoTen, `ngaySinh`=$NgaySinh, `gioiTinh`=$GioiTinh, `soCMND`=$CMND, `SDT`=$SĐT, `nganhHoc`=$NganhHoc, `lopHoc`=$LopHoc 
+            WHERE idSinhVien = $MaSV";
+            mysqli_query($conn, $sql);
+            mysqli_close($conn);
+        }
+        catch(Exception $e){
+            echo "Lỗi".$e;
+        }
+    }
 ?>
 
 <div class="col-md-12">  
@@ -30,7 +61,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Họ tên</div>
                 <div class="col-md-10">
-                    <input type="text" value="" name="HoTen" class="form-control" required>
+                    <input type="text" value="<?php echo $HoTen; ?>" name="HoTen" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -38,7 +69,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Ngày sinh</div>
                 <div class="col-md-10">
-                    <input type="date" value="" name="NgaySinh" class="form-control" required>
+                    <input type="date" value="<?php echo $NgaySinh; ?>" name="NgaySinh" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -46,8 +77,11 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Giới tính</div>
                 <div class="col-md-10 input-control-sv">
-                    <input type="radio" name="GioiTinh" value="0" checked>Nam
-                    <input type="radio" value="1" name="GioiTinh" >Nữ
+                    <?php
+                    if($GioiTinh==0)
+                        echo '<input type="radio" name="GioiTinh" value="0" checked>Nam<input type="radio" value="1" name="GioiTinh" >Nữ';
+                    else echo '<input type="radio" name="GioiTinh" value="0" >Nam<input type="radio" value="1" name="GioiTinh" checked>Nữ';
+                    ?>
                 </div>
             </div>
             <!-- end rows -->
@@ -55,7 +89,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Số chứng minh thư</div>
                 <div class="col-md-10">
-                    <input type="number" value="" name="CMND" class="form-control" required>
+                    <input type="number" value="<?php echo $CMND; ?>" name="CMND" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -63,7 +97,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Số điện thoại</div>
                 <div class="col-md-10">
-                    <input type="number" value="" name="SĐT" class="form-control" required>
+                    <input type="number" value="<?php echo $SĐT; ?>" name="SĐT" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -93,7 +127,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <input type="submit" value="Thêm" class="btn btn-primary">
+                    <input type="submit" value="Thêm" class="btn btn-primary" onclick="<?php update() ?>">
                 </div>
             </div>
             <!-- end rows -->
