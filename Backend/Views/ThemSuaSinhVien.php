@@ -13,7 +13,10 @@
         try{
             $sql = "INSERT INTO sinhvien (`hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `khoa`, `lopHoc`) 
             VALUES('$HoTen1','$NgaySinh1',$GioiTinh1,'$CMND1','$SĐT1','$Khoa1','$LopHoc1');";
-            mysqli_query($conn, $sql);
+            $resultAdd = mysqli_query($conn, $sql);
+            if(isset($resultAdd) && $resultAdd!=""){
+                echo "<script>location.href='index.php?page=QLSinhVien'</script>";
+            }
             mysqli_close($conn);
         }
         catch(Exception $e){
@@ -36,7 +39,10 @@
             $sqlEdit = "UPDATE sinhvien 
             SET hoTen='$HoTen1', ngaySinh='$NgaySinh1', gioiTinh=$GioiTinh1, soCMND='$CMND1', SDT='$SĐT1', khoa='$Khoa1', lopHoc='$LopHoc1' 
             WHERE idSinhVien = '$MaSV'";
-            mysqli_query($conn, $sqlEdit);
+            $resultEdit= mysqli_query($conn, $sqlEdit);
+            if(isset($resultEdit) && $resultEdit!=""){
+                echo "<script>location.href='index.php?page=QLSinhVien'</script>";
+            }
             mysqli_close($conn);
         }
         catch(Exception $e){
