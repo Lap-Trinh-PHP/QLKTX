@@ -1,24 +1,24 @@
 <?php
     $action = isset($_GET["action"]) ? $_GET["action"] : null;
     $MaSV = isset($_GET["id"]) ? $_GET["id"] : null;
-    $HoTen = isset($_POST["HoTen"]) ? $_POST["HoTen"] : null;
-    $NgaySinh = isset($_POST["NgaySinh"]) ? $_POST["NgaySinh"] : null;
-    $GioiTinh = isset($_POST["GioiTinh"]) ? $_POST["GioiTinh"] : null;
-    $CMND = isset($_POST["CMND"]) ? $_POST["CMND"] : null;
-    $SĐT = isset($_POST["SĐT"]) ? $_POST["SĐT"] : null;
-    $NganhHoc = isset($_POST["NganhHoc"]) ? $_POST["NganhHoc"] : null;
-    $LopHoc = isset($_POST["LopHoc"]) ? $_POST["LopHoc"] : null;
+    $HoTen1 = isset($_POST["HoTen"]) ? $_POST["HoTen"] : null;
+    $NgaySinh1 = isset($_POST["NgaySinh"]) ? $_POST["NgaySinh"] : null;
+    $GioiTinh1 = isset($_POST["GioiTinh"]) ? $_POST["GioiTinh"] : null;
+    $CMND1 = isset($_POST["CMND"]) ? $_POST["CMND"] : null;
+    $SĐT1 = isset($_POST["SĐT"]) ? $_POST["SĐT"] : null;
+    $Khoa1 = isset($_POST["Khoa"]) ? $_POST["Khoa"] : null;
+    $LopHoc1 = isset($_POST["LopHoc"]) ? $_POST["LopHoc"] : null;
+    $HoTen = $NgaySinh = $GioiTinh = $CMND = $SĐT = $Khoa = $LopHoc = "";
     if($action == "add"){
         try{
-            $sql = "INSERT INTO sinhvien (`hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `nganhHoc`, `lopHoc`) 
-            VALUES('$HoTen','$NgaySinh',$GioiTinh,'$CMND','$SĐT','$NganhHoc','$LopHoc');";
+            $sql = "INSERT INTO sinhvien (`hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `khoa`, `lopHoc`) 
+            VALUES('$HoTen1','$NgaySinh1',$GioiTinh1,'$CMND1','$SĐT1','$Khoa1','$LopHoc1');";
             mysqli_query($conn, $sql);
             mysqli_close($conn);
         }
         catch(Exception $e){
             echo "Lỗi".$e;
         }
-        
     }
     if($action == "edit"){
         try{
@@ -30,21 +30,26 @@
             $GioiTinh = $row["gioiTinh"];
             $CMND = $row["soCMND"];
             $SĐT = $row["SDT"];
-            $NganhHoc = $row["nganhHoc"];
+            $Khoa = $row["khoa"];
             $LopHoc = $row["lopHoc"];
+
+            $sqlEdit = "UPDATE sinhvien 
+            SET hoTen='$HoTen1', ngaySinh='$NgaySinh1', gioiTinh=$GioiTinh1, soCMND='$CMND1', SDT='$SĐT1', khoa='$Khoa1', lopHoc='$LopHoc1' 
+            WHERE idSinhVien = '$MaSV'";
+            mysqli_query($conn, $sqlEdit);
+            mysqli_close($conn);
         }
         catch(Exception $e){
-            echo "Lỗi".$e;
+            $err = $e;
         }
         
     }
-    function update(){
+    if($action == "delete"){
         try{
-            $sql = "UPDATE sinhvien 
-            SET `hoTen`=$HoTen, `ngaySinh`=$NgaySinh, `gioiTinh`=$GioiTinh, `soCMND`=$CMND, `SDT`=$SĐT, `nganhHoc`=$NganhHoc, `lopHoc`=$LopHoc 
-            WHERE idSinhVien = $MaSV";
-            mysqli_query($conn, $sql);
+            $sqlDelete = "DELETE FROM sinhvien WHERE idSinhVien = '$MaSV'";
+            mysqli_query($conn, $sqlDelete);
             mysqli_close($conn);
+            echo "<script>location.href='index.php?page=QLSinhVien'</script>";
         }
         catch(Exception $e){
             echo "Lỗi".$e;
@@ -54,9 +59,25 @@
 
 <div class="col-md-12">  
     <div class="panel panel-primary">
-        <div class="panel-heading">Thêm sửa sinh viên</div>
+        <?php
+            if($action == "add")
+                echo " <div class='panel-heading'>Thêm sinh viên</div>";
+            if($action == "edit")
+                echo " <div class='panel-heading'>Sửa sinh viên</div>";
+        ?>
+       
         <div class="panel-body">
-        <form method="post" enctype="multipart/form-data" >
+        <form method="post" enctype="multipart/form-data">
+            <?php
+                if($action == "edit"){
+                    echo "<div class='row' style='margin-top:5px;'>
+                            <div class='col-md-2'>Mã sinh viên</div>
+                            <div class='col-md-10'>
+                                <input type='text' value='$MaSV' name='MaSV' class='form-control' readonly>
+                            </div>
+                        </div>";
+                }
+            ?>
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Họ tên</div>
@@ -103,12 +124,9 @@
             <!-- end rows -->
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Ngành học</div>
+                <div class="col-md-2">Khoa</div>
                 <div class="col-md-10">
-                    <select class="form-control" style="width: 200px;" name="NganhHoc">
-                        <option value="" selected>Chọn ngành học</option>
-                        <option value="CNTT" >CNTT</option>
-                    </select>
+                    <input type="text" value="<?php echo $Khoa; ?>" name="Khoa" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -116,10 +134,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Lớp học</div>
                 <div class="col-md-10">
-                    <select class="form-control" style="width: 200px;" name="LopHoc">
-                        <option value="" selected>Chọn lớp học</option>
-                        <option value="KTPM" >KTPM1</option>
-                    </select>
+                    <input type="text" value="<?php echo $LopHoc; ?>" name="LopHoc" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -127,7 +142,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <input type="submit" value="Thêm" class="btn btn-primary" onclick="<?php update() ?>">
+                    <input type="submit" value="<?php if($action == "edit") echo "Sửa"; else echo "Thêm"; ?>" class="btn btn-primary" onclick="<script>location.href='index.php?page=QLSinhVien'</script>">
                 </div>
             </div>
             <!-- end rows -->
