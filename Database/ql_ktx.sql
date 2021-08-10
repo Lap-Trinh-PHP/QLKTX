@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 09, 2021 lúc 10:15 AM
--- Phiên bản máy phục vụ: 10.4.18-MariaDB
--- Phiên bản PHP: 7.3.28
+-- Thời gian đã tạo: Th8 10, 2021 lúc 04:25 PM
+-- Phiên bản máy phục vụ: 10.4.11-MariaDB
+-- Phiên bản PHP: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -91,13 +91,6 @@ CREATE TABLE `kyluat` (
   `ngayLap` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Đang đổ dữ liệu cho bảng `kyluat`
---
-
-INSERT INTO `kyluat` (`idKyLuat`, `tenKyLuat`, `idSinhVien`, `chiTiet`, `ngayLap`) VALUES
-(1, 'Trèo cổng sau 10h đêm', 2018602121, 'ba la ba la ba la ba la ba la ba la ba la ba la ba la ba la ba la ba la ba la ba la ba la ba la ba l', '2021-08-02');
-
 -- --------------------------------------------------------
 
 --
@@ -131,7 +124,7 @@ CREATE TABLE `sinhvien` (
   `gioiTinh` int(1) DEFAULT NULL,
   `soCMND` char(20) DEFAULT NULL,
   `SDT` char(20) DEFAULT NULL,
-  `nganhHoc` varchar(30) DEFAULT NULL,
+  `khoa` varchar(30) DEFAULT NULL,
   `lopHoc` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -139,9 +132,8 @@ CREATE TABLE `sinhvien` (
 -- Đang đổ dữ liệu cho bảng `sinhvien`
 --
 
-INSERT INTO `sinhvien` (`idSinhVien`, `hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `nganhHoc`, `lopHoc`) VALUES
-(2018602020, 'Trần Sơn Đỉnh', '2000-03-27', 0, '03620000915', '0328488026', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1'),
-(2018602121, 'Nguyễn Quốc Đạt', '2000-08-08', 1, '0362000091', '0328488027', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1');
+INSERT INTO `sinhvien` (`idSinhVien`, `hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `khoa`, `lopHoc`) VALUES
+(2018602126, 'Nguyễn Duy Đồng', '2021-08-01', 0, '123456789', '032555648', 'Kế toán', 'Kiểm toán');
 
 -- --------------------------------------------------------
 
@@ -157,13 +149,6 @@ CREATE TABLE `taisan` (
   `ngayMuon` datetime DEFAULT NULL,
   `ngayTra` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `taisan`
---
-
-INSERT INTO `taisan` (`idTaiSan`, `idSinhVien`, `idPhong`, `soLuong`, `ngayMuon`, `ngayTra`) VALUES
-(1, 2018602020, 100, 2, '2021-09-08 00:00:00', '2021-10-08 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -293,6 +278,16 @@ ALTER TABLE `tructuquan`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `sinhvien`
+--
+ALTER TABLE `sinhvien`
+  MODIFY `idSinhVien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2018602127;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

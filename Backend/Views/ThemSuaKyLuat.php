@@ -1,13 +1,87 @@
+<?php
+    $action = isset($_GET["action"]) ? $_GET["action"] : null;
+    $id = isset($_GET["id"]) ? $_GET["id"] : null;
+    $TenKyLuat = isset($_POST["TenKyLuat"]) ? $_POST["TenKyLuat"] : null;
+    $MaSV = isset($_POST["MaSV"]) ? $_POST["MaSV"] : null;
+    $ChiTiet = isset($_POST["ChiTiet"]) ? $_POST["ChiTiet"] : null;
+    $NgayLap = isset($_POST["NgayLap"]) ? $_POST["NgayLap"] : null;
+    $TenKyLuat1 = $ChiTiet1 = $NgayLap1 = "";
+    $sql1 = "SELECT * FROM sinhvien";
+    $resultSV = mysqli_query($conn, $sql1);
+    if($action == "add" && $MaSV != ""){
+        try{
+            $sql = "INSERT INTO kyluat (`tenKyLuat`, `idSinhVien`, `chiTiet`, `ngayLap`) 
+            VALUES('$TenKyLuat','$MaSV','$ChiTiet','$NgayLap');";
+            $resultAdd = mysqli_query($conn, $sql);
+            if(isset($resultAdd) && $resultAdd!=""){
+                echo "<script>location.href='index.php?page=QLKyLuat'</script>";
+            }
+            mysqli_close($conn);
+        }
+        catch(Exception $e){
+            echo "<script> alert('Xin kiểm tra lại dữ liệu vừa nhập')</script>";
+        }
+    }
+    if($action == "edit"){
+        try{
+            $sql2 = "SELECT * FROM kyluat WHERE idKyLuat = $id";
+            $getKyLuat = mysqli_query($conn, $sql2);
+            $rowEdit = mysqli_fetch_assoc($getKyLuat);
+            $MaSV1 = $rowEdit["idSinhVien"];
+            $TenKyLuat1 = $rowEdit["tenKyLuat"];
+            $ChiTiet1 = $rowEdit["chiTiet"];
+            $NgayLap1 = $rowEdit["ngayLap"];
+
+            $sqlEdit = "UPDATE kyluat 
+            SET tenKyLuat='$TenKyLuat', idSinhVien='$MaSV', chiTiet='$ChiTiet', ngayLap='$NgayLap'
+            WHERE idKyLuat = '$id'";
+            $resultEdit= mysqli_query($conn, $sqlEdit);
+            if(isset($resultEdit) && $resultEdit!=""){
+                echo "<script>location.href='index.php?page=QLKyLuat'</script>";
+            }
+            mysqli_close($conn);
+        }
+        catch(Exception $e){
+            echo "<script> alert('Xin kiểm tra lại dữ liệu vừa nhập')</script>";
+        }
+    }
+    if($action == "delete"){
+        try{
+            $sqlDelete = "DELETE FROM kyluat WHERE idKyLuat = '$id'";
+            mysqli_query($conn, $sqlDelete);
+            mysqli_close($conn);
+            echo "<script>location.href='index.php?page=QLKyLuat'</script>";
+        }
+        catch(Exception $e){
+            echo "Lỗi".$e;
+        }
+    }
+?>
 <div class="col-md-12">  
     <div class="panel panel-primary">
-        <div class="panel-heading">Thêm sửa kỷ luật</div>
+        <?php
+            if($action == "add")
+                echo "<div class='panel-heading'>Thêm kỷ luật</div>";
+            if($action == "edit")
+                echo "<div class='panel-heading'>Sửa kỷ luật</div>";
+        ?>
+        
         <div class="panel-body">
-        <form method="post" enctype="multipart/form-data" action="<?php echo $action; ?>">
+        <form method="post" enctype="multipart/form-data">
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
-                <div class="col-md-2">Mã sinh viên</div>
+                <div class="col-md-2">Mã-Tên sinh viên</div>
                 <div class="col-md-10">
-                    <input type="text" value="" name="idSinhVien" class="form-control" required>
+                    <select class="form-control selectSV" style="width: 200px;" name="MaSV">
+                        <option value="">Chọn mã-tên sinh viên</option>
+                        <?php
+                            while($rowSV = mysqli_fetch_assoc($resultSV)){
+                                if($MaSV1 == $rowSV["idSinhVien"])
+                                    echo "<option selected value='".$rowSV["idSinhVien"]."' >".$rowSV["idSinhVien"]." - ".$rowSV["hoTen"]."</option>";
+                                else echo "<option value='".$rowSV["idSinhVien"]."' >".$rowSV["idSinhVien"]." - ".$rowSV["hoTen"]."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <!-- end rows -->
@@ -15,7 +89,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Hình thức kỷ luật</div>
                 <div class="col-md-10">
-                    <input type="text" value="" name="tenKyLuat" class="form-control" required>
+                    <input type="text" value="<?php echo $TenKyLuat1; ?>" name="TenKyLuat" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -23,7 +97,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Lý do</div>
                 <div class="col-md-10 ">
-                    <textarea name="chiTiet" rows="5" style="width:100%"></textarea>
+                    <textarea name="ChiTiet" rows="5" style="width:100%"><?php echo $ChiTiet1; ?></textarea>
                 </div>
             </div>
             <!-- end rows -->
@@ -31,7 +105,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Ngày lập</div>
                 <div class="col-md-10">
-                    <input type="date" value="" name="ngayLap" class="form-control" required>
+                    <input type="date" value="<?php echo $NgayLap1; ?>" name="NgayLap" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -39,7 +113,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <input type="submit" value="Thêm" class="btn btn-primary">
+                    <input type="submit" value="<?php if($action == "edit") echo "Sửa"; else echo "Thêm"; ?>" class="btn btn-primary" />
                 </div>
             </div>
             <!-- end rows -->

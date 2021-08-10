@@ -20,7 +20,7 @@
             mysqli_close($conn);
         }
         catch(Exception $e){
-            echo "Lỗi".$e;
+            echo "<script> alert('Xin kiểm tra lại dữ liệu vừa nhập')</script>";
         }
     }
     if($action == "edit"){
@@ -46,7 +46,7 @@
             mysqli_close($conn);
         }
         catch(Exception $e){
-            $err = $e;
+            echo "<script> alert('Xin kiểm tra lại dữ liệu vừa nhập')</script>";
         }
         
     }
