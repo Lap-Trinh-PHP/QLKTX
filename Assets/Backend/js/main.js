@@ -1,22 +1,9 @@
-const inputs = document.querySelectorAll(".input");
 
-
-function addcl(){
-	let parent = this.parentNode.parentNode;
-	parent.classList.add("focus");
+function showOption() {
+	const menuChild = document.getElementById("menu-child").classList;
+	menuChild.forEach(value => {
+		if (value === "hide")
+			menuChild.remove("hide");
+		else menuChild.add("hide");
+	});
 }
-
-function remcl(){
-	let parent = this.parentNode.parentNode;
-	if(this.value == ""){
-		parent.classList.remove("focus");
-	}
-}
-
-
-inputs.forEach(input => {
-	input.addEventListener("focus", addcl);
-	input.addEventListener("blur", remcl);
-});
-
-// jquery
