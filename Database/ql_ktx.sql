@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 10, 2021 lúc 04:25 PM
+-- Thời gian đã tạo: Th8 11, 2021 lúc 06:20 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.4
 
@@ -91,6 +91,13 @@ CREATE TABLE `kyluat` (
   `ngayLap` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Đang đổ dữ liệu cho bảng `kyluat`
+--
+
+INSERT INTO `kyluat` (`idKyLuat`, `tenKyLuat`, `idSinhVien`, `chiTiet`, `ngayLap`) VALUES
+(1, 'Ra ngoài sau 22h', 2018602126, 'hihi', '2021-08-06');
+
 -- --------------------------------------------------------
 
 --
@@ -109,7 +116,8 @@ CREATE TABLE `phong` (
 --
 
 INSERT INTO `phong` (`idPhong`, `soLuongSv`, `tinhTrang`, `option`) VALUES
-(100, 10, 'tốt', 'có đầy đủ nóng lạnh, điều hòa, nước ổn');
+(100, 10, 'tốt', 'có đầy đủ nóng lạnh, điều hòa, nước ổn'),
+(101, 10, 'tốt', 'full option');
 
 -- --------------------------------------------------------
 
@@ -173,10 +181,10 @@ CREATE TABLE `thutien` (
 
 CREATE TABLE `tructuquan` (
   `idTruc` int(11) NOT NULL,
-  `idPhong` int(11) DEFAULT NULL,
-  `tangTruc` int(11) DEFAULT NULL,
-  `ngayBatDau` datetime DEFAULT NULL,
-  `ngayKetThuc` datetime DEFAULT NULL
+  `idPhong` int(11) NOT NULL,
+  `tangTruc` int(11) NOT NULL,
+  `ngayBatDau` date NOT NULL,
+  `ngayKetThuc` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -184,7 +192,7 @@ CREATE TABLE `tructuquan` (
 --
 
 INSERT INTO `tructuquan` (`idTruc`, `idPhong`, `tangTruc`, `ngayBatDau`, `ngayKetThuc`) VALUES
-(1, 100, 1, '2021-08-02 16:57:03', '2021-08-03 16:57:03');
+(1, 100, 2, '2021-08-02', '2021-08-03');
 
 -- --------------------------------------------------------
 
@@ -284,10 +292,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `kyluat`
+--
+ALTER TABLE `kyluat`
+  MODIFY `idKyLuat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT cho bảng `sinhvien`
 --
 ALTER TABLE `sinhvien`
-  MODIFY `idSinhVien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2018602127;
+  MODIFY `idSinhVien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2018602128;
+
+--
+-- AUTO_INCREMENT cho bảng `tructuquan`
+--
+ALTER TABLE `tructuquan`
+  MODIFY `idTruc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
