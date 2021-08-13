@@ -7,5 +7,10 @@
 	$page = isset($_GET["page"]) ? $_GET["page"] : "";
 	if($page!="")
 		$fileController = $page.".php";
-    include "Views/LayoutView.php";
+	if(!isset($_SESSION["username"])){
+		include "Views/Login.php";
+	}else{
+		include "Views/LayoutView.php";
+	}
+    // include "Views/LayoutView.php";
  ?>

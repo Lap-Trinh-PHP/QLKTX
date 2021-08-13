@@ -41,25 +41,13 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../Assets/Backend/images/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Your name</span>
+                            <span class="hidden-xs"><?php  echo isset($_SESSION['username']) ? $_SESSION['username'] : 'your name'; ?></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="../Assets/Backend/images/user2-160x160.jpg" class="img-circle" alt="User Image">
-<!-- 
-                                <p>
-                                    <?php echo $_SESSION["email"]?>
-                                    <small>Web developer</small>
-                                </p> -->
-                            </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
                                 <div class="pull-right">
-                                    <a href="index.php?controller=login&action=logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -78,7 +66,7 @@
                     <img src="../Assets/Backend/images/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Your name</p>
+                    <p><?php  echo isset($_SESSION['username']) ? $_SESSION['username'] : 'your name'; ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
