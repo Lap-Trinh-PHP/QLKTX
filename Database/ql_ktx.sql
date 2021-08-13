@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 11, 2021 lúc 06:20 AM
+-- Thời gian đã tạo: Th8 13, 2021 lúc 12:44 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.4
 
@@ -211,7 +211,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `userName`, `password`) VALUES
-(1, 'admin', 'admin');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Chỉ mục cho các bảng đã đổ
