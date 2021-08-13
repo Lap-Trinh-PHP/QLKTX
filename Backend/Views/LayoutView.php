@@ -11,14 +11,11 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../Assets/Backend/css/font-awesome.min.css">
     <link rel="stylesheet" href="../Assets/Backend/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../Assets/Backend/css/styles.css">
     <link rel="stylesheet" href="../Assets/Backend/css/_all-skins.min.css">
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <!-- load file ckeditor.js -->
-    <!-- <script type="text/javascript" src="ckeditor/ckeditor.js"></script> -->
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -44,25 +41,13 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="../Assets/Backend/images/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Your name</span>
+                            <span class="hidden-xs"><?php  echo isset($_SESSION['username']) ? $_SESSION['username'] : 'your name'; ?></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="../Assets/Backend/images/user2-160x160.jpg" class="img-circle" alt="User Image">
-<!-- 
-                                <p>
-                                    <?php echo $_SESSION["email"]?>
-                                    <small>Web developer</small>
-                                </p> -->
-                            </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
                                 <div class="pull-right">
-                                    <a href="index.php?controller=login&action=logout" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="Views/Logout.php" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
@@ -81,7 +66,7 @@
                     <img src="../Assets/Backend/images/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Your name</p>
+                    <p><?php  echo isset($_SESSION['username']) ? $_SESSION['username'] : 'your name'; ?></p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -89,9 +74,12 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">LAOYOUT ADMIN</li>
                 <li>
-                    <a href="index.php?page=QLSinhVien">
-                        <i class="fa fa-th"></i> <span>Quản lý sinh viên</span>
-                    </a>
+                    <div onclick={showOption()}><i class="fa fa-th"></i><span>Quản lý sinh viên</span></div>
+                    <ul class="menu-child hide" id="menu-child">
+                        <li><a href="index.php?page=QLSinhVien"><span>Thông tin sinh viên</span></a></li>
+                        <li><a href="index.php?page=QLKyLuat"><span>Kỷ luật</span></a></li>
+                        <li><a href="index.php?page=QLTrucTQ"><span>Trực tự quản</span></a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="index.php?page=QLPhong">
@@ -139,9 +127,6 @@
         </section>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
@@ -154,5 +139,6 @@
 <script src="../Assets/Backend/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../Assets/Backend/js/adminlte.min.js"></script>
+<script src="../Assets/Backend/js/main.js"></script>
 </body>
 </html>
