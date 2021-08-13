@@ -53,6 +53,6 @@ ul, li{
 select.selectSV{
     width: 300px;
 }
-li.dropdown:hover ul.dropdown-menu{
+li.dropdown:hover ul.dropdown-menu, li.dropdown:focus ul.dropdown-menu{
     display: block!important;
 }
