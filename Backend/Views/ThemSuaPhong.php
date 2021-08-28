@@ -5,6 +5,7 @@
     $soluong=isset($_POST["soLuongSv"]) ? $_POST["soLuongSv"] : null;
     $tinhtrang=isset($_POST["tinhTrang"]) ? $_POST["tinhTrang"] : null;
     $option = isset($_POST["Option"]) ? $_POST["Option"] : null;
+    
     if($actionP=="add"){
         try{
             $sqlInsertPhong="INSERT INTO `phong`(`idPhong`, `soLuongSv`, `tinhTrang`, `option`) 
