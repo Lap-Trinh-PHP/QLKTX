@@ -1,9 +1,9 @@
 <h1>QL phòng</h1>
 <div class="col-md-12">
     <div style="margin-bottom:5px;">
-        <a href="index.php?page=ThemSuaPhong" class="btn btn-primary">Thêm phòng</a>
+        <a href="index.php?page=ThemSuaPhong&action=add" class="btn btn-primary">Thêm phòng</a>
     </div>
-    <div class="panel panel-primary">
+    <div class="panel panel-primary" >
         <div class="panel-heading">Danh sách phòng</div>
         <div class="panel-body">
             <table class="table table-bordered table-hover">
@@ -24,8 +24,8 @@
                             <td style='max-width: 100px;'>".$row["tinhTrang"]."</td>
                             <td style='max-width: 100px;'>".$row["option"]."</td>
                             <td  style='text-align:center;max-width:150px;'>
-                                <a class='btn btn-info' href='index.php?page=ThemSuaPhong'>Edit</a>&nbsp;
-                                <a class='btn btn-danger' href='#' onclick='return window.confirm('Are you sure?');'>Delete</a>
+                                <a class='btn btn-info' href='index.php?page=ThemSuaPhong&action=edit&id=".$row["idPhong"]."'>Edit</a>&nbsp;
+                                <a class='btn btn-danger' href='index.php?page=ThemSuaPhong&action=delete&id=".$row["idPhong"]."' onclick='return window.confirm('Are you sure?');'>Delete</a>
                             </td>
                         </tr>";
                     };
