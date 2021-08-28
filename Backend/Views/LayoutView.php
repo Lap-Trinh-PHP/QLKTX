@@ -82,9 +82,15 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="index.php?page=QLPhong">
+                    <!-- <a href="index.php?page=QLPhong">
                         <i class="fa fa-th"></i> <span>Quản lý phòng</span>
-                    </a>
+                    </a> -->
+                    <div onclick={showOptionPhong()}><i class="fa fa-th"></i><span>Quản lý phòng</span></div>
+                    <ul class="menu-child hide" id="menu-child-2">
+                        <li><a href="index.php?page=QLPhong"><span>Quản lý phòng</span></a></li>
+                        <li><a href="index.php?page=QLDienNuoc"><span>Quản lý điện nước</span></a></li>
+                        <li><a href="index.php?page=QLTaiSan"><span>Quản lý tài sản</span></a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="index.php?page=QLHopDong">

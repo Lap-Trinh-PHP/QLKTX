@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div style="margin-bottom:5px;">
-        <a href="index.php?page=ThemSuaTaiSan" class="btn btn-primary">Thêm</a>
+        <a href="index.php?page=ThemSuaTaiSan&action=add" class="btn btn-primary">Thêm</a>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Danh sách mượn tài sản của sinh viên KTX</div>
@@ -30,8 +30,8 @@
                             <td style='max-width: 50px;'>".$row["ngayMuon"]."</td>
                             <td style='max-width: 50px;'>".$row["ngayTra"]."</td>
                             <td  style='text-align:center;max-width:70px;'>
-                                <a class='btn btn-info' href='index.php?page=ThemSuaTaiSan'>Edit</a>&nbsp;
-                                <a class='btn btn-danger' href='#' onclick='return window.confirm('Are you sure?');'>Delete</a>
+                                <a class='btn btn-info' href='index.php?page=ThemSuaTaiSan&action=edit&id=".$row2["idTaiSan"]."'>Edit</a>&nbsp;
+                                <a class='btn btn-danger' href='index.php?page=ThemSuaTaiSan&action=delete&id=".$row2["idTaiSan"]."' onclick='return window.confirm('Are you sure?');'>Delete</a>
                             </td>
                         </tr>";
                     };
