@@ -11,16 +11,18 @@
                     <th style="max-width:100px;"></th>
                 </tr>
                 <?php
-                    $sql = "SELECT * FROM diennuoc";
-                    $result = mysqli_query($conn, $sql);
-                    while($row = mysqli_fetch_assoc($result)){
+                $sql = "SELECT * FROM diennuoc";
+                $result = mysqli_query($conn, $sql);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if (is_numeric($row["soDienOut"]) && is_numeric($row["soDienIn"]) && is_numeric($row["soNuocOut"]) && is_numeric($row["soNuocIn"])) {
                         echo "<tr>
-                            <td style='max-width: 180px;'>".$row["idPhong"]."</td>
-                            <td style='max-width: 100px;'>".$row["soDienOut"] - $row["soDienIn"]."</td>
-                            <td style='max-width: 100px;'>".$row["soNuocOut"] - $row["soNuocIn"]."</td>
-                        </tr>";
-                    };
-                    mysqli_close($conn);
+                                <td style='max-width: 180px;'>" . $row["idPhong"] . "</td>
+                                <td style='max-width: 100px;'>" . $row["soDienOut"] - $row["soDienIn"] . "</td>
+                                <td style='max-width: 100px;'>" . $row["soNuocOut"] - $row["soNuocIn"] . "</td>
+                            </tr>";
+                    }
+                };
+                mysqli_close($conn);
                 ?>
             </table>
         </div>
