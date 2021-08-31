@@ -1,7 +1,7 @@
 <h1>QL Điện Nước</h1>
 <div class="col-md-12">
     <div style="margin-bottom:5px;">
-        <a href="index.php?page=ThemSuaDienNuoc" class="btn btn-primary">Thêm </a>
+        <a href="index.php?page=ThemSuaDienNuoc&action=add" class="btn btn-primary">Thêm </a>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Danh sách điện nước các phòng</div>
@@ -34,8 +34,8 @@
                             <td style='max-width: 100px;'>".$row["soNuocOut"]."</td>
                             
                             <td  style='text-align:center;max-width:150px;'>
-                                <a class='btn btn-info' href='index.php?page=ThemSuaDienNuoc'>Edit</a>&nbsp;
-                                <a class='btn btn-danger' href='#' onclick='return window.confirm('Are you sure?');'>Delete</a>
+                                <a class='btn btn-info' href='index.php?page=ThemSuaDienNuoc&action=edit&id=".$row["idHoaDon"]."'>Edit</a>&nbsp;
+                                <a class='btn btn-danger' href='index.php?page=ThemSuaDienNuoc&action=delete&id=".$row["idHoaDon"]."' onclick='return window.confirm('Are you sure?');'>Delete</a>
                             </td>
                         </tr>";
                     };
