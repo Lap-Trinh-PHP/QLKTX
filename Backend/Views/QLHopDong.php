@@ -1,7 +1,7 @@
 
 <div class="col-md-12">
     <div style="margin-bottom:5px;">
-        <a href="index.php?page=ThemSuaSinhVien" class="btn btn-primary">Thêm hợp đồng</a>
+        <a href="index.php?page=ThemSuaHopDong&action=add" class="btn btn-primary">Thêm hợp đồng</a>
     </div>
     <div class="panel panel-primary">
         <div class="panel-heading">Danh sách hợp đồng</div>
@@ -15,7 +15,6 @@
                     <th style="max-width: 100px;">Ngày bắt đầu</th>
                     <th style="max-width: 150px;">Ngày kết thúc</th>
                     <th style="max-width: 150px;">Trạng thái</th>
-                    <th style="max-width:100px;"></th>
                 </tr>
                 <?php
                     $sql = "SELECT * FROM hopdong";
