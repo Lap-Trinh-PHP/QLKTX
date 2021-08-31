@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 13, 2021 lúc 12:44 PM
--- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.4.4
+-- Host: 127.0.0.1
+-- Generation Time: Aug 31, 2021 at 06:57 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `ql_ktx`
+-- Database: `ql_ktx`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `diennuoc`
+-- Table structure for table `diennuoc`
 --
 
 CREATE TABLE `diennuoc` (
@@ -37,7 +37,7 @@ CREATE TABLE `diennuoc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `diennuoc`
+-- Dumping data for table `diennuoc`
 --
 
 INSERT INTO `diennuoc` (`idHoaDon`, `idPhong`, `soDienIn`, `soDienOut`, `soNuocIn`, `soNuocOut`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `diennuoc` (`idHoaDon`, `idPhong`, `soDienIn`, `soDienOut`, `soNuocI
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `hoadon`
+-- Table structure for table `hoadon`
 --
 
 CREATE TABLE `hoadon` (
@@ -64,23 +64,30 @@ CREATE TABLE `hoadon` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `hopdong`
+-- Table structure for table `hopdong`
 --
 
 CREATE TABLE `hopdong` (
   `idHopDong` int(11) NOT NULL,
   `idSinhVien` int(11) DEFAULT NULL,
   `idPhong` int(11) DEFAULT NULL,
-  `ngayLap` datetime DEFAULT NULL,
-  `ngayBatDau` datetime DEFAULT NULL,
-  `ngayKetThuc` datetime DEFAULT NULL,
+  `ngayLap` date DEFAULT NULL,
+  `ngayBatDau` date DEFAULT NULL,
+  `ngayKetThuc` date DEFAULT NULL,
   `status` varchar(100) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hopdong`
+--
+
+INSERT INTO `hopdong` (`idHopDong`, `idSinhVien`, `idPhong`, `ngayLap`, `ngayBatDau`, `ngayKetThuc`, `status`) VALUES
+(0, 2018602128, 100, '2021-08-05', '2021-08-16', '2021-08-30', 'Chưa ở');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `kyluat`
+-- Table structure for table `kyluat`
 --
 
 CREATE TABLE `kyluat` (
@@ -92,7 +99,7 @@ CREATE TABLE `kyluat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `kyluat`
+-- Dumping data for table `kyluat`
 --
 
 INSERT INTO `kyluat` (`idKyLuat`, `tenKyLuat`, `idSinhVien`, `chiTiet`, `ngayLap`) VALUES
@@ -101,7 +108,7 @@ INSERT INTO `kyluat` (`idKyLuat`, `tenKyLuat`, `idSinhVien`, `chiTiet`, `ngayLap
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `phong`
+-- Table structure for table `phong`
 --
 
 CREATE TABLE `phong` (
@@ -112,17 +119,18 @@ CREATE TABLE `phong` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `phong`
+-- Dumping data for table `phong`
 --
 
 INSERT INTO `phong` (`idPhong`, `soLuongSv`, `tinhTrang`, `option`) VALUES
-(100, 10, 'tốt', 'có đầy đủ nóng lạnh, điều hòa, nước ổn'),
-(101, 10, 'tốt', 'full option');
+(100, 10, 'xấu', 'có đầy đủ nóng lạnh, điều hòa, nước ổn'),
+(101, 10, 'tốt', 'full option'),
+(102, 20, 'Tốt', 'Điều hòa');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sinhvien`
+-- Table structure for table `sinhvien`
 --
 
 CREATE TABLE `sinhvien` (
@@ -137,16 +145,17 @@ CREATE TABLE `sinhvien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `sinhvien`
+-- Dumping data for table `sinhvien`
 --
 
 INSERT INTO `sinhvien` (`idSinhVien`, `hoTen`, `ngaySinh`, `gioiTinh`, `soCMND`, `SDT`, `khoa`, `lopHoc`) VALUES
-(2018602126, 'Nguyễn Duy Đồng', '2021-08-01', 0, '123456789', '032555648', 'Kế toán', 'Kiểm toán');
+(2018602126, 'Nguyễn Duy Đồng', '2021-08-01', 0, '123456789', '032555648', 'Kế toán', 'Kiểm toán'),
+(2018602128, 'Trần Sơn Đỉnh', '2000-07-28', 0, '1254911', '6510131', 'Công nghệ thông tin', 'Kỹ thuật phần mềm 1');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `taisan`
+-- Table structure for table `taisan`
 --
 
 CREATE TABLE `taisan` (
@@ -161,7 +170,7 @@ CREATE TABLE `taisan` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `thutien`
+-- Table structure for table `thutien`
 --
 
 CREATE TABLE `thutien` (
@@ -176,7 +185,7 @@ CREATE TABLE `thutien` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `tructuquan`
+-- Table structure for table `tructuquan`
 --
 
 CREATE TABLE `tructuquan` (
@@ -188,7 +197,7 @@ CREATE TABLE `tructuquan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `tructuquan`
+-- Dumping data for table `tructuquan`
 --
 
 INSERT INTO `tructuquan` (`idTruc`, `idPhong`, `tangTruc`, `ngayBatDau`, `ngayKetThuc`) VALUES
@@ -197,7 +206,7 @@ INSERT INTO `tructuquan` (`idTruc`, `idPhong`, `tangTruc`, `ngayBatDau`, `ngayKe
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -207,32 +216,32 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Đang đổ dữ liệu cho bảng `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `userName`, `password`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `diennuoc`
+-- Indexes for table `diennuoc`
 --
 ALTER TABLE `diennuoc`
   ADD PRIMARY KEY (`idHoaDon`),
   ADD KEY `fk_DienNuoc_phong` (`idPhong`);
 
 --
--- Chỉ mục cho bảng `hoadon`
+-- Indexes for table `hoadon`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`idHoaDon`),
   ADD KEY `idPhong` (`idPhong`);
 
 --
--- Chỉ mục cho bảng `hopdong`
+-- Indexes for table `hopdong`
 --
 ALTER TABLE `hopdong`
   ADD PRIMARY KEY (`idHopDong`),
@@ -240,26 +249,26 @@ ALTER TABLE `hopdong`
   ADD KEY `idPhong` (`idPhong`);
 
 --
--- Chỉ mục cho bảng `kyluat`
+-- Indexes for table `kyluat`
 --
 ALTER TABLE `kyluat`
   ADD PRIMARY KEY (`idKyLuat`),
   ADD KEY `idSinhVien` (`idSinhVien`);
 
 --
--- Chỉ mục cho bảng `phong`
+-- Indexes for table `phong`
 --
 ALTER TABLE `phong`
   ADD PRIMARY KEY (`idPhong`);
 
 --
--- Chỉ mục cho bảng `sinhvien`
+-- Indexes for table `sinhvien`
 --
 ALTER TABLE `sinhvien`
   ADD PRIMARY KEY (`idSinhVien`);
 
 --
--- Chỉ mục cho bảng `taisan`
+-- Indexes for table `taisan`
 --
 ALTER TABLE `taisan`
   ADD PRIMARY KEY (`idTaiSan`),
@@ -267,7 +276,7 @@ ALTER TABLE `taisan`
   ADD KEY `fk_TaiSan_phong` (`idPhong`);
 
 --
--- Chỉ mục cho bảng `thutien`
+-- Indexes for table `thutien`
 --
 ALTER TABLE `thutien`
   ADD PRIMARY KEY (`maThu`),
@@ -275,85 +284,85 @@ ALTER TABLE `thutien`
   ADD KEY `idPhong` (`idPhong`);
 
 --
--- Chỉ mục cho bảng `tructuquan`
+-- Indexes for table `tructuquan`
 --
 ALTER TABLE `tructuquan`
   ADD PRIMARY KEY (`idTruc`),
   ADD KEY `idPhong` (`idPhong`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `kyluat`
+-- AUTO_INCREMENT for table `kyluat`
 --
 ALTER TABLE `kyluat`
   MODIFY `idKyLuat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT cho bảng `sinhvien`
+-- AUTO_INCREMENT for table `sinhvien`
 --
 ALTER TABLE `sinhvien`
-  MODIFY `idSinhVien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2018602128;
+  MODIFY `idSinhVien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2018602129;
 
 --
--- AUTO_INCREMENT cho bảng `tructuquan`
+-- AUTO_INCREMENT for table `tructuquan`
 --
 ALTER TABLE `tructuquan`
   MODIFY `idTruc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `diennuoc`
+-- Constraints for table `diennuoc`
 --
 ALTER TABLE `diennuoc`
   ADD CONSTRAINT `fk_DienNuoc_phong` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
 
 --
--- Các ràng buộc cho bảng `hoadon`
+-- Constraints for table `hoadon`
 --
 ALTER TABLE `hoadon`
   ADD CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
 
 --
--- Các ràng buộc cho bảng `hopdong`
+-- Constraints for table `hopdong`
 --
 ALTER TABLE `hopdong`
   ADD CONSTRAINT `hopdong_ibfk_1` FOREIGN KEY (`idSinhVien`) REFERENCES `sinhvien` (`idSinhVien`),
   ADD CONSTRAINT `hopdong_ibfk_2` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
 
 --
--- Các ràng buộc cho bảng `kyluat`
+-- Constraints for table `kyluat`
 --
 ALTER TABLE `kyluat`
   ADD CONSTRAINT `kyluat_ibfk_1` FOREIGN KEY (`idSinhVien`) REFERENCES `sinhvien` (`idSinhVien`);
 
 --
--- Các ràng buộc cho bảng `taisan`
+-- Constraints for table `taisan`
 --
 ALTER TABLE `taisan`
   ADD CONSTRAINT `fk_TaiSan_SV` FOREIGN KEY (`idSinhVien`) REFERENCES `sinhvien` (`idSinhVien`),
   ADD CONSTRAINT `fk_TaiSan_phong` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
 
 --
--- Các ràng buộc cho bảng `thutien`
+-- Constraints for table `thutien`
 --
 ALTER TABLE `thutien`
   ADD CONSTRAINT `thutien_ibfk_1` FOREIGN KEY (`idSinhVien`) REFERENCES `sinhvien` (`idSinhVien`),
   ADD CONSTRAINT `thutien_ibfk_2` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
 
 --
--- Các ràng buộc cho bảng `tructuquan`
+-- Constraints for table `tructuquan`
 --
 ALTER TABLE `tructuquan`
   ADD CONSTRAINT `tructuquan_ibfk_1` FOREIGN KEY (`idPhong`) REFERENCES `phong` (`idPhong`);
