@@ -7,9 +7,10 @@
     $soluong=isset($_POST["soLuong"]) ? $_POST["soLuong"] : null;
     $ngaymuon=isset($_POST["ngayMuon"]) ? $_POST["ngayMuon"] : null;
     $ngaytra=isset($_POST["ngayTra"]) ? $_POST["ngayTra"] : null;
+    $test1=isset($_POST["ngayMuon"]) ? $_POST["ngayMuon"] : null;
+    $test2=isset($_POST["ngayTra"]) ? $_POST["ngayTra"] : null;
 
-    if($actionT=="add"){
-        
+    if($actionT=="add"){        
         try{
             $sqlInsertTS="INSERT INTO `taisan`(`idTaiSan`, `idSinhVien`, `idPhong`, `soLuong`, `ngayMuon`, `ngayTra`) 
             VALUES ($matsmoi,$masinhvien,$maphong,$soluong,'$ngaymuon','$ngaytra')";
@@ -79,7 +80,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Mã tài sản</div>
                 <div class="col-md-10">
-                    <input type="text" value="<?php echo isset($mataisan)? $mataisan :''; ?>" name="maTaiSan" class="form-control" required>
+                    <input type="text" value="<?php echo isset($mataisan)? $mataisan :'';/*  echo $test1." - ".$test2*/ ?>"  name="maTaiSan" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
