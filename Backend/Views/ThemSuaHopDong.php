@@ -10,7 +10,7 @@
     if($action == "add"){
         try{
                 $sql = "INSERT INTO hopdong (`idHopDong`, `idSinhVien`, `idPhong`, `ngayLap`, `ngayBatDau`, `ngayKetThuc`, `status`) 
-                VALUES('$MaHopDong','$MaSinhVien',$MaPhong,'$NgayLap','$NgayLap','$NgayBatDau','$NgayKetThuc', '$TrangThai');";
+                VALUES($MaHopDong,$MaSinhVien,$MaPhong,'$NgayLap','$NgayLap','$NgayBatDau','$NgayKetThuc', $TrangThai);";
                 $resultAdd = mysqli_query($conn, $sql);
                 if(isset($resultAdd) && $resultAdd!=""){
                     echo "<script>location.href='index.php?page=QLHopDong'</script>";
