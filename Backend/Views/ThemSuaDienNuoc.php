@@ -7,7 +7,8 @@
     $sodienmoi=isset($_POST["soDienMoi"]) ? $_POST["soDienMoi"] : null;
     $sonuoccu=isset($_POST["soNuocCu"]) ? $_POST["soNuocCu"] : null;
     $sonuocmoi=isset($_POST["soNuocMoi"]) ? $_POST["soNuocMoi"] : null;
-
+    $sql2 = "SELECT * FROM phong";
+    $resultPhong = mysqli_query($conn, $sql2);
     if($actionT=="add"){
         
         try{
@@ -87,7 +88,16 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Mã phòng</div>
                 <div class="col-md-10">
-                    <input type="text" value="<?php echo isset($maphong1)? $maphong1 :''; ?>" name="maPhong" class="form-control" required>
+                    <select class="form-control selectSV" style="width: 200px;" name="idPhong">
+                        <option >Chọn mã phòng</option>
+                        <?php
+                            while($rowP = mysqli_fetch_assoc($resultPhong)){
+                                if($maphong1 == $rowP["idPhong"])
+                                    echo "<option selected value='".$rowP["idPhong"]."' >".$rowP["idPhong"]."</option>";
+                                else echo "<option value='".$rowP["idPhong"]."' >".$rowP["idPhong"]."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <!-- end rows -->

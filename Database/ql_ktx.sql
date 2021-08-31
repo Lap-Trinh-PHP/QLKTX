@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2021 at 06:57 PM
+-- Generation Time: Aug 31, 2021 at 07:11 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -163,9 +163,16 @@ CREATE TABLE `taisan` (
   `idSinhVien` int(11) DEFAULT NULL,
   `idPhong` int(11) NOT NULL,
   `soLuong` int(11) DEFAULT NULL,
-  `ngayMuon` datetime DEFAULT NULL,
-  `ngayTra` datetime DEFAULT NULL
+  `ngayMuon` date DEFAULT NULL,
+  `ngayTra` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `taisan`
+--
+
+INSERT INTO `taisan` (`idTaiSan`, `idSinhVien`, `idPhong`, `soLuong`, `ngayMuon`, `ngayTra`) VALUES
+(1, 2018602128, 100, 2, '2021-09-02', '2021-09-08');
 
 -- --------------------------------------------------------
 

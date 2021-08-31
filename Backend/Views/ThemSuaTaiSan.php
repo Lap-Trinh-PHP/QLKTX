@@ -10,6 +10,10 @@
     $test1=isset($_POST["ngayMuon"]) ? $_POST["ngayMuon"] : null;
     $test2=isset($_POST["ngayTra"]) ? $_POST["ngayTra"] : null;
 
+    $sql1 = "SELECT * FROM sinhvien";
+    $resultSV = mysqli_query($conn, $sql1);
+    $sql2 = "SELECT * FROM phong";
+    $resultPhong = mysqli_query($conn, $sql2);
     if($actionT=="add"){        
         try{
             $sqlInsertTS="INSERT INTO `taisan`(`idTaiSan`, `idSinhVien`, `idPhong`, `soLuong`, `ngayMuon`, `ngayTra`) 
@@ -88,7 +92,16 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Mã sinh viên</div>
                 <div class="col-md-10">
-                    <input type="text" value="<?php echo isset($masinhvien1)? $masinhvien1 :''; ?>" name="maSinhVien" class="form-control" required>
+                    <select class="form-control selectSV" style="width: 200px;" name="maSinhVien">
+                        <option >Chọn mã-tên sinh viên</option>
+                        <?php
+                            while($rowSV = mysqli_fetch_assoc($resultSV)){
+                                if($masinhvien1 == $rowSV["idSinhVien"])
+                                    echo "<option selected value='".$rowSV["idSinhVien"]."' >".$rowSV["idSinhVien"]." - ".$rowSV["hoTen"]."</option>";
+                                else echo "<option value='".$rowSV["idSinhVien"]."' >".$rowSV["idSinhVien"]." - ".$rowSV["hoTen"]."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <!-- end rows -->
@@ -96,7 +109,16 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Mã phòng</div>
                 <div class="col-md-10">
-                    <input type="text" value="<?php echo isset($maphong1)? $maphong1 :''; ?>" name="maPhong" class="form-control" required>
+                    <select class="form-control selectSV" style="width: 200px;" name="maPhong">
+                        <option >Chọn mã phòng</option>
+                        <?php
+                            while($rowP = mysqli_fetch_assoc($resultPhong)){
+                                if($maphong1 == $rowP["idPhong"])
+                                    echo "<option selected value='".$rowP["idPhong"]."' >".$rowP["idPhong"]."</option>";
+                                else echo "<option value='".$rowP["idPhong"]."' >".$rowP["idPhong"]."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <!-- end rows -->
