@@ -29,8 +29,8 @@
                             <td style='max-width: 150px;'>".$row["ngayKetThuc"]."</td>
                             <td style='max-width: 150px;'>".$row["status"]."</td>
                             <td  style='text-align:center;max-width:150px;'>
-                                <a class='btn btn-info' href='index.php?page=ThemHopDong'>Edit</a>&nbsp;
-                                <a class='btn btn-danger' href='#' onclick='return window.confirm('Are you sure?');'>Delete</a>
+                                <a class='btn btn-info' href='index.php?page=ThemSuaHopDong&action=edit&id=".$row["idHopDong"]."'>Edit</a>&nbsp;
+                                <a class='btn btn-danger' href='index.php?page=ThemSuaHopDong&action=delete&id=".$row["idHopDong"]."' onclick='return window.confirm('Are you sure?');'>Delete</a>
                             </td>
                         </tr>";
                     };

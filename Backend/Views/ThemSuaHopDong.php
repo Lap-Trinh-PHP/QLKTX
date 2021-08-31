@@ -1,16 +1,21 @@
 <?php
     $action = isset($_GET["action"]) ? $_GET["action"] : null;
-    $MaHopDong = isset($_GET["idHopDong"]) ? $_GET["idHopDong"] : null;
+    $MaHopDong = isset($_GET["id"]) ? $_GET["id"] : null;
     $MaSinhVien = isset($_POST["idSinhVien"]) ? $_POST["idSinhVien"] : null;
     $MaPhong = isset($_POST["idPhong"]) ? $_POST["idPhong"] : null;
     $NgayLap = isset($_POST["ngayLap"]) ? $_POST["ngayLap"] : null;
     $NgayBatDau = isset($_POST["ngayBatDau"]) ? $_POST["ngayBatDau"] : null;
     $NgayKetThuc = isset($_POST["ngayKetThuc"]) ? $_POST["ngayKetThuc"] : null;
     $TrangThai = isset($_POST["status"]) ? $_POST["status"] : null;
+
+    $sql1 = "SELECT * FROM sinhvien";
+    $resultSV = mysqli_query($conn, $sql1);
+    $sql2 = "SELECT * FROM phong";
+    $resultPhong = mysqli_query($conn, $sql2);
     if($action == "add"){
         try{
                 $sql = "INSERT INTO hopdong (`idHopDong`, `idSinhVien`, `idPhong`, `ngayLap`, `ngayBatDau`, `ngayKetThuc`, `status`) 
-                VALUES($MaHopDong,$MaSinhVien,$MaPhong,'$NgayLap','$NgayLap','$NgayBatDau','$NgayKetThuc', $TrangThai);";
+                VALUES('$MaHopDong','$MaSinhVien','$MaPhong','$NgayLap','$NgayBatDau','$NgayKetThuc', '$TrangThai');";
                 $resultAdd = mysqli_query($conn, $sql);
                 if(isset($resultAdd) && $resultAdd!=""){
                     echo "<script>location.href='index.php?page=QLHopDong'</script>";
@@ -23,23 +28,24 @@
     }
     if($action == "edit"){
         try{
-            $sql1 = "SELECT * FROM hopdong WHERE idHopDong = $MaHopDong";
-            $result = mysqli_query($conn, $sql1);
-            $row = mysqli_fetch_assoc($result);
-            $MaHopDong = $row["idHopDong"];
-            $MaSinhVien = $row["idSinhVien"];
-            $MaPhong = $row["idPhong"];
-            $NgayLap = $row["ngayLap"];
-            $NgayBatDau = $row["ngayBatDau"];
-            $NgayKetThuc = $row["ngayKetThuc"];
-            $TrangThai = $row["status"];
+            $sql3 = "SELECT * FROM hopdong WHERE idHopDong = $MaHopDong";
+            $resultEdit = mysqli_query($conn, $sql3);
+            $rowEdit = mysqli_fetch_assoc($resultEdit);
+            $MaSinhVien1 = $rowEdit["idSinhVien"];
+            $MaPhong1 = $rowEdit["idPhong"];
+            $NgayLap1 = $rowEdit["ngayLap"];
+            $NgayBatDau1 = $rowEdit["ngayBatDau"];
+            $NgayKetThuc1 = $rowEdit["ngayKetThuc"];
+            $TrangThai1 = $rowEdit["status"];
 
-            $sqlEdit = "UPDATE hopdong 
-            SET idSinhVien = '$MaSinhVien', idPhong='$MaPhong', ngayLap=$NgayLap, ngayBatDau='$NgayBatDau', ngayKetThuc='$NgayKetThuc', status='$status'
-            WHERE idHopDong = '$MaHopDong'";
-            $resultEdit= mysqli_query($conn, $sqlEdit);
-            if(isset($resultEdit) && $resultEdit!=""){
-                echo "<script>location.href='index.php?page=QLHopDong'</script>";
+            if($MaSinhVien != null){
+                $sqlEdit = "UPDATE hopdong 
+                SET idSinhVien = '$MaSinhVien', idPhong='$MaPhong', ngayLap='$NgayLap', ngayBatDau='$NgayBatDau', ngayKetThuc='$NgayKetThuc', status='$TrangThai'
+                WHERE idHopDong = '$MaHopDong'";
+                $resultEdit= mysqli_query($conn, $sqlEdit);
+                if(isset($resultEdit) && $resultEdit!=""){
+                    echo "<script>location.href='index.php?page=QLHopDong'</script>";
+                }
             }
             mysqli_close($conn);
         }
@@ -50,7 +56,7 @@
     }
     if($action == "delete"){
         try{
-            $sqlDelete = "DELETE FROM hopdong WHERE idHopDong = '$MaHopDong'";
+            $sqlDelete = "DELETE FROM hopdong WHERE idHopDong = $MaHopDong";
             $delete = mysqli_query($conn, $sqlDelete);
             mysqli_close($conn);
             if(isset($delete) && $delete != ""){
@@ -74,16 +80,6 @@
        
         <div class="panel-body">
         <form method="post" enctype="multipart/form-data">
-            <?php
-                if($action == "edit"){
-                    echo "<div class='row' style='margin-top:5px;'>
-                            <div class='col-md-2'>Mã hợp đồng</div>
-                            <div class='col-md-10'>
-                                <input type='text' value='$MaHopDong' name='idHopDong' class='form-control' readonly>
-                            </div>
-                        </div>";
-                }
-            ?>
             <!-- rows -->
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Mã hợp đồng</div>
@@ -96,7 +92,16 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Mã sinh viên</div>
                 <div class="col-md-10">
-                    <input type="text" value="<?php echo isset($MaSinhVien)? $MaSinhVien:''; ?>" name="idSinhVien" class="form-control" required>
+                    <select class="form-control selectSV" style="width: 200px;" name="idSinhVien">
+                        <option >Chọn mã-tên sinh viên</option>
+                        <?php
+                            while($rowSV = mysqli_fetch_assoc($resultSV)){
+                                if($MaSinhVien1 == $rowSV["idSinhVien"])
+                                    echo "<option selected value='".$rowSV["idSinhVien"]."' >".$rowSV["idSinhVien"]." - ".$rowSV["hoTen"]."</option>";
+                                else echo "<option value='".$rowSV["idSinhVien"]."' >".$rowSV["idSinhVien"]." - ".$rowSV["hoTen"]."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <!-- end rows -->
@@ -104,7 +109,16 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Mã phòng</div>
                 <div class="col-md-10">
-                <input type="text" value="<?php echo isset($MaPhong)? $MaPhong:''; ?>" name="idPhong" class="form-control" required>
+                    <select class="form-control selectSV" style="width: 200px;" name="idPhong">
+                        <option >Chọn mã phòng</option>
+                        <?php
+                            while($rowP = mysqli_fetch_assoc($resultPhong)){
+                                if($MaPhong1 == $rowP["idPhong"])
+                                    echo "<option selected value='".$rowP["idPhong"]."' >".$rowP["idPhong"]."</option>";
+                                else echo "<option value='".$rowP["idPhong"]."' >".$rowP["idPhong"]."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
             </div>
             <!-- end rows -->
@@ -112,7 +126,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Ngày lập</div>
                 <div class="col-md-10">
-                    <input type="date" value="<?php echo isset($NgayLap)? $NgayLap:''; ?>" name="ngayLap" class="form-control" required>
+                    <input type="date" value="<?php echo isset($NgayLap1)? $NgayLap1:''; ?>" name="ngayLap" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -120,7 +134,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Ngày bắt đầu</div>
                 <div class="col-md-10">
-                    <input type="date" value="<?php echo isset($NgayBatDau)? $NgayBatDau:''; ?>" name="ngayBatDau" class="form-control" required>
+                    <input type="date" value="<?php echo isset($NgayBatDau1)? $NgayBatDau1:''; ?>" name="ngayBatDau" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -128,7 +142,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Ngày kết thúc</div>
                 <div class="col-md-10">
-                    <input type="date" value="<?php echo isset($NgayKetThuc)? $NgayKetThuc:''; ?>" name="ngayKetThuc" class="form-control" required>
+                    <input type="date" value="<?php echo isset($NgayKetThuc1)? $NgayKetThuc1:''; ?>" name="ngayKetThuc" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -136,7 +150,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2">Trạng thái</div>
                 <div class="col-md-10">
-                    <input type="number" value="<?php echo isset($status)? $status:''; ?>" name="status" class="form-control" required>
+                    <input type="text" value="<?php echo isset($TrangThai1)? $TrangThai1:''; ?>" name="status" class="form-control" required>
                 </div>
             </div>
             <!-- end rows -->
@@ -144,7 +158,7 @@
             <div class="row" style="margin-top:5px;">
                 <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    <input type="submit" value="<?php if($action == "edit") echo "Sửa"; else echo "Thêm"; ?>" class="btn btn-primary" onclick="<script>location.href='index.php?page=QLSinhVien'</script>">
+                    <input type="submit" value="<?php if($action == "edit") echo "Sửa"; else echo "Thêm"; ?>" class="btn btn-primary">
                 </div>
             </div>
             <!-- end rows -->
