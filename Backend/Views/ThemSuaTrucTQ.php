@@ -13,6 +13,7 @@
                 VALUES('$idPhong','$tangTruc','$ngayBatDau','$ngayKetThuc');";
                 $resultAdd = mysqli_query($conn, $sql);
                 if(isset($resultAdd) && $resultAdd!=""){
+                    echo "<script> alert('Thêm thành công !!!')</script>";
                     echo "<script>location.href='index.php?page=QLTrucTQ'</script>";
                 }
                 mysqli_close($conn);
@@ -37,6 +38,7 @@
                 WHERE idTruc = '$id'";
                 $resultEdit= mysqli_query($conn, $sqlEdit);
                 if(isset($resultEdit) && $resultEdit!=""){
+                    echo "<script> alert('Sửa thành công !!!')</script>";
                     echo "<script>location.href='index.php?page=QLTrucTQ'</script>";
                 }
                 mysqli_close($conn);

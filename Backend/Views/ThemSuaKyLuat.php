@@ -13,6 +13,7 @@
             VALUES('$TenKyLuat','$MaSV','$ChiTiet','$NgayLap');";
             $resultAdd = mysqli_query($conn, $sql);
             if(isset($resultAdd) && $resultAdd!=""){
+                echo "<script> alert('Thêm thành công !!!')</script>";
                 echo "<script>location.href='index.php?page=QLKyLuat'</script>";
             }
             mysqli_close($conn);
@@ -30,16 +31,15 @@
             $TenKyLuat1 = $rowEdit["tenKyLuat"];
             $ChiTiet1 = $rowEdit["chiTiet"];
             $NgayLap1 = $rowEdit["ngayLap"];
-            if(!$TenKyLuat){
+            if($TenKyLuat != null){
                 $sqlEdit = "UPDATE kyluat 
                 SET tenKyLuat='$TenKyLuat', idSinhVien='$MaSV', chiTiet='$ChiTiet', ngayLap='$NgayLap'
                 WHERE idKyLuat = '$id'";
                 $resultEdit= mysqli_query($conn, $sqlEdit);
                 if(isset($resultEdit) && $resultEdit!=""){
+                    echo "<script> alert('Sửa thành công !!!')</script>";
                     echo "<script>location.href='index.php?page=QLKyLuat'</script>";
                 }
-            }else{
-                echo "<script> alert('Xin kiểm tra lại dữ liệu vừa nhập')</script>";
             }
             mysqli_close($conn);
         }
