@@ -1,6 +1,7 @@
 <?php
     $action = isset($_GET["action"]) ? $_GET["action"] : null;
     $MaHopDong = isset($_GET["id"]) ? $_GET["id"] : null;
+    $MaHopDong1 = isset($_POST["idHopDong"]) ? $_POST["idHopDong"] : null;
     $MaSinhVien = isset($_POST["idSinhVien"]) ? $_POST["idSinhVien"] : null;
     $MaPhong = isset($_POST["idPhong"]) ? $_POST["idPhong"] : null;
     $NgayLap = isset($_POST["ngayLap"]) ? $_POST["ngayLap"] : null;
@@ -15,7 +16,7 @@
     if($action == "add"){
         try{
                 $sql = "INSERT INTO hopdong (`idHopDong`, `idSinhVien`, `idPhong`, `ngayLap`, `ngayBatDau`, `ngayKetThuc`, `status`) 
-                VALUES('$MaHopDong','$MaSinhVien','$MaPhong','$NgayLap','$NgayBatDau','$NgayKetThuc', '$TrangThai');";
+                VALUES('$MaHopDong1','$MaSinhVien','$MaPhong','$NgayLap','$NgayBatDau','$NgayKetThuc', N'$TrangThai')";
                 $resultAdd = mysqli_query($conn, $sql);
                 if(isset($resultAdd) && $resultAdd!=""){
                     echo "<script>location.href='index.php?page=QLHopDong'</script>";
