@@ -1,5 +1,5 @@
 <?php 
-	$conn = mysqli_connect("localhost","root","","ql_ktx");
+	$conn = mysqli_connect("localhost","root","","test_ktx");
 	if(!$conn){
 		echo "Lỗi kết nối DB";
 		exit();

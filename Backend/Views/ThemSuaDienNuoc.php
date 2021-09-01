@@ -2,13 +2,14 @@
     $actionT=isset($_GET["action"]) ? $_GET["action"] : null;
     $idHoaDon=isset($_GET["id"]) ? $_GET["id"] : null;
     $mahoadon=isset($_POST["maHoaDon"]) ? $_POST["maHoaDon"] :null;
-    $maphong=isset($_POST["maPhong"]) ? $_POST["maPhong"] : null;
+    $maphong=isset($_POST["idPhong"]) ? $_POST["idPhong"] : null;
     $sodiencu=isset($_POST["soDienCu"]) ? $_POST["soDienCu"] : null;
     $sodienmoi=isset($_POST["soDienMoi"]) ? $_POST["soDienMoi"] : null;
     $sonuoccu=isset($_POST["soNuocCu"]) ? $_POST["soNuocCu"] : null;
     $sonuocmoi=isset($_POST["soNuocMoi"]) ? $_POST["soNuocMoi"] : null;
     $sql2 = "SELECT * FROM phong";
     $resultPhong = mysqli_query($conn, $sql2);
+
     if($actionT=="add"){
         
         try{
@@ -36,7 +37,7 @@
             $sodienmoi1=$row["soDienOut"];
             $sonuoccu1=$row["soNuocIn"];
             $sonuocmoi1=$row["soNuocOut"];
-            $sqlEditDN="UPDATE `diennuoc` SET `soDienIn`=$sodiencu,`soDienOut`=$sodienmoi,`soNuocIn`=$sonuoccu,`soNuocOut`=$sonuocmoi WHERE `idHoaDon`=$idHoaDon";
+            $sqlEditDN="UPDATE `diennuoc` SET `idPhong`=$maphong, `soDienIn`=$sodiencu,`soDienOut`=$sodienmoi,`soNuocIn`=$sonuoccu,`soNuocOut`=$sonuocmoi WHERE `idHoaDon`=$idHoaDon";
             $resultEditDN=mysqli_query($conn,$sqlEditDN);
             if(isset($resultEditDN) && $resultEditDN != ""){
                 echo "<script>location.href='index.php?page=QLDienNuoc'</script>";
